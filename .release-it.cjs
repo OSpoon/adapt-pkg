@@ -1,0 +1,28 @@
+/* eslint-disable no-template-curly-in-string */
+module.exports = {
+  hooks: {
+    'after:bump': 'npm run typecheck && npm run test:ci && npm run build',
+  },
+  git: {
+    commitMessage: 'chore: release v${version}',
+  },
+  plugins: {
+    '@release-it/conventional-changelog': {
+      infile: 'CHANGELOG.md',
+      preset: {
+        name: 'conventionalcommits',
+        header: '# Changelog',
+        types: [
+          { type: 'feat', section: 'Features' },
+          { type: 'fix', section: 'Bug Fixes' },
+          { type: 'chore', hidden: true },
+          { type: 'docs', hidden: true },
+          { type: 'style', hidden: true },
+          { type: 'refactor', hidden: true },
+          { type: 'perf', hidden: true },
+          { type: 'test', hidden: true },
+        ],
+      },
+    },
+  },
+}
