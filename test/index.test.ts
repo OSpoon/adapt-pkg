@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { generationMITLicense, generationPkg, generationReadme, isEffectivelibrary, paramsVerify } from '../src/utils'
+import { generationMITLicense, generationPkg, generationReadme, getPkgInfo, isEffectivelibrary, paramsVerify, splitAuthor } from '../src/utils'
 
 describe('utils.ts', () => {
   it('isEffectivelibrary', () => {
@@ -62,7 +62,7 @@ describe('utils.ts', () => {
 
     expect(pkgInfo.name).toMatchInlineSnapshot('"test-lib"')
 
-    expect(pkgInfo.author).toMatchInlineSnapshot('"OSpoon <zxin088@gmail.com>"')
+    expect(pkgInfo.author).toMatchInlineSnapshot('"OSpoon zxin088@gmail.com"')
 
     expect(pkgInfo.homepage).toMatchInlineSnapshot('"https://github.com/OSpoon/test-lib#readme"')
 
@@ -74,5 +74,115 @@ describe('utils.ts', () => {
     `)
 
     expect(pkgInfo.bugs).toMatchInlineSnapshot('"https://github.com/OSpoon/test-lib/issues"')
+  })
+
+  it('splitAuthor', () => {
+    let result = splitAuthor('OSpoon zxin088@gmail.com')
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "author": "OSpoon",
+        "email": "zxin088@gmail.com",
+      }
+    `)
+    result = splitAuthor('OSpoon')
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "author": "OSpoon",
+        "email": "",
+      }
+    `)
+    result = splitAuthor('')
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "author": "",
+        "email": "",
+      }
+    `)
+  })
+
+  it('getPkgInfo', () => {
+    const result = getPkgInfo()
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "author": "OSpoon zxin088@gmail.com",
+        "bin": {
+          "a-pkg": "./bin/cli.mjs",
+          "adapt-pkg": "./bin/cli.mjs",
+        },
+        "bugs": "https://github.com/OSpoon/adapt-pkg/issues",
+        "dependencies": {
+          "inquirer": "^9.2.11",
+          "minimist": "^1.2.8",
+          "picocolors": "^1.0.0",
+        },
+        "description": "Initialize the library name, description, Github, Readme, and MIT License",
+        "devDependencies": {
+          "@antfu/eslint-config": "^1.0.0-beta.22",
+          "@release-it/conventional-changelog": "^7.0.2",
+          "@types/inquirer": "^9.0.4",
+          "@types/minimist": "^1.2.3",
+          "@types/node": "^20.8.3",
+          "eslint": "^8.51.0",
+          "esno": "^0.17.0",
+          "lint-staged": "^14.0.1",
+          "release-it": "^16.1.5",
+          "rimraf": "^5.0.5",
+          "simple-git-hooks": "^2.9.0",
+          "typescript": "^5.2.2",
+          "unbuild": "^2.0.0",
+          "vitest": "^0.34.6",
+        },
+        "exports": {
+          ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs",
+            "types": "./dist/index.d.ts",
+          },
+        },
+        "files": [
+          "bin",
+          "dist",
+        ],
+        "homepage": "https://github.com/OSpoon/adapt-pkg#readme",
+        "keywords": [],
+        "license": "MIT",
+        "lint-staged": {
+          "*": "eslint --fix",
+        },
+        "main": "./dist/index.mjs",
+        "module": "./dist/index.mjs",
+        "name": "adapt-pkg",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/OSpoon/adapt-pkg.git",
+        },
+        "scripts": {
+          "build": "unbuild",
+          "dev": "unbuild --stub",
+          "lint": "eslint .",
+          "prepare": "simple-git-hooks",
+          "release": "release-it",
+          "start": "esno src/index.ts",
+          "test": "vitest",
+          "test:ci": "vitest run",
+          "typecheck": "tsc --noEmit",
+        },
+        "sideEffects": false,
+        "simple-git-hooks": {
+          "pre-commit": "npx lint-staged",
+        },
+        "type": "module",
+        "types": "./dist/index.d.ts",
+        "typesVersions": {
+          "*": {
+            "*": [
+              "./dist/*",
+              "./dist/index.d.ts",
+            ],
+          },
+        },
+        "version": "0.0.0",
+      }
+    `)
   })
 })

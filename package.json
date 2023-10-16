@@ -1,16 +1,16 @@
 {
-  "name": "init-pkg",
+  "name": "adapt-pkg",
   "type": "module",
   "version": "0.0.0",
   "description": "Initialize the library name, description, Github, Readme, and MIT License",
-  "author": "OSpoon",
+  "author": "OSpoon zxin088@gmail.com",
   "license": "MIT",
-  "homepage": "https://github.com/OSpoon/init-pkg#readme",
+  "homepage": "https://github.com/OSpoon/adapt-pkg#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OSpoon/init-pkg.git"
+    "url": "git+https://github.com/OSpoon/adapt-pkg.git"
   },
-  "bugs": "https://github.com/OSpoon/init-pkg/issues",
+  "bugs": "https://github.com/OSpoon/adapt-pkg/issues",
   "keywords": [],
   "sideEffects": false,
   "exports": {
@@ -32,10 +32,11 @@
     }
   },
   "bin": {
-    "i-pkg": "./bin/cli.mjs",
-    "init-pkg": "./bin/cli.mjs"
+    "a-pkg": "./bin/cli.mjs",
+    "adapt-pkg": "./bin/cli.mjs"
   },
   "files": [
+    "bin",
     "dist"
   ],
   "scripts": {

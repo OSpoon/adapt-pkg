@@ -1,15 +1,15 @@
-# init-pkg
+# adapt-pkg
 
-Initialize the library name, description, repository, readme, and license for MIT
+Initialize the library name, description, Github, Readme, and MIT License
 
 ## Usage
 
-```shell
-npx init-pkg -n test-lib -d "一个测试库" -a  OSpoon -e "zxin088@gmail.com"
+```bash
+npx adapt-pkg -n test-lib -d "一个测试库" -a  OSpoon -e "zxin088@gmail.com"
 ```
 
-```shell
-npx init-pkg --boot
+```bash
+npx adapt-pkg --boot
 ```
 
 ## License

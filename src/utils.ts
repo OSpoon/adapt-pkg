@@ -2,7 +2,22 @@ import { log } from 'node:console'
 import path from 'node:path'
 import process from 'node:process'
 import fs from 'node:fs'
-import { green, red } from 'picocolors'
+import pc from 'picocolors'
+
+const { green, red } = pc
+
+export function getPkgInfo() {
+  const pkgContent = fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')
+  return JSON.parse(pkgContent)
+}
+
+export function splitAuthor(content: string) {
+  const [author, email] = content.split(' ')
+  return {
+    author: author || '',
+    email: email || '',
+  }
+}
 
 export function isEffectivelibrary() {
   return fs.existsSync(path.join(process.cwd(), 'package.json'))
@@ -22,13 +37,12 @@ export function paramsVerify(...args: string[]) {
 }
 
 export function generationPkg(name: string, description: string, author: string, email: string) {
-  const pkgContent = fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')
-  const pkg = JSON.parse(pkgContent)
+  const pkg = getPkgInfo()
   return {
     ...pkg,
     name,
     description,
-    author: `${author} <${email}>`,
+    author: `${author} ${email}`,
     homepage: `https://github.com/${author}/${name}#readme`,
     repository: {
       type: pkg.repository.type,
@@ -77,7 +91,7 @@ SOFTWARE.
 export function generation(name: string, description: string, author: string, email: string) {
   // 校验录入的项目名称、描述、作者参数完整
   if (!paramsVerify(name, description, author))
-    exit(true, `${green('[init-pkg]: ')}${red('running failure, the parameters seem incomplete.')}`)
+    exit(true, `${green('[adapt-pkg]: ')}${red('running failure, the parameters seem incomplete.')}`)
 
   const pkgInfo = generationPkg(name, description, author, email)
   fs.writeFileSync('package.json', JSON.stringify(pkgInfo, null, 2))
@@ -88,5 +102,5 @@ export function generation(name: string, description: string, author: string, em
   const license = generationMITLicense(author)
   fs.writeFileSync('LICENSE', license)
 
-  log(`${green('[init-pkg]: running successful 🎉')}`)
+  log(`${green('[adapt-pkg]: running successful 🎉')}`)
 }

@@ -1,10 +1,13 @@
 import process from 'node:process'
 
 import minimist from 'minimist'
-import { green, red } from 'picocolors'
+import pc from 'picocolors'
+
 import inquirer from 'inquirer'
 import { exit, generation, isEffectivelibrary } from './utils'
 import { QUESTIONS, USAGE } from './constants'
+
+const { green, red } = pc
 
 async function startup() {
   const argv = minimist(process.argv.slice(2))
@@ -15,7 +18,7 @@ async function startup() {
 
   // 校验是否是有效的模块
   if (!isEffectivelibrary())
-    exit(true, `${green('[init-pkg]: ')}${red('this folder should be initialized with npm init -y.')}`)
+    exit(true, `${green('[adapt-pkg]: ')}${red('this folder should be initialized with npm init -y.')}`)
 
   // 支持引导模式和命令模式
   if (argv.boot) {
