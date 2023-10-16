@@ -1,7 +1,7 @@
 {
   "name": "adapt-pkg",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Initialize the library name, description, repository, readme and license for MIT",
   "author": "OSpoon zxin088@gmail.com",
   "license": "MIT",
