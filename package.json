@@ -2,7 +2,7 @@
   "name": "adapt-pkg",
   "type": "module",
   "version": "0.0.0",
-  "description": "Initialize the library name, description, Github, Readme, and MIT License",
+  "description": "Initialize the library name, description, repository, readme and license for MIT",
   "author": "OSpoon zxin088@gmail.com",
   "license": "MIT",
   "homepage": "https://github.com/OSpoon/adapt-pkg#readme",

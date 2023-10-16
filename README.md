@@ -1,6 +1,6 @@
 # adapt-pkg
 
-Initialize the library name, description, Github, Readme, and MIT License
+Initialize the library name, description, repository, readme and license for MIT
 
 ## Usage
 
