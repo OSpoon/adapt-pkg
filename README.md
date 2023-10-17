@@ -1,4 +1,3 @@
-# adapt-pkg
 
 Initialize the library name, description, repository, readme and license for MIT
 
