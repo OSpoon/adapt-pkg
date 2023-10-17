@@ -93,13 +93,20 @@ export function generation(name: string, description: string, author: string, em
   if (!paramsVerify(name, description, author))
     exit(true, `${green('[adapt-pkg]: ')}${red('running failure, the parameters seem incomplete.')}`)
 
-  const pkgInfo = generationPkg(name, description, author, email)
+  const { _name, _description, _author, _email } = {
+    _name: name.trim(),
+    _description: description.trim(),
+    _author: author.trim(),
+    _email: email.trim(),
+  }
+
+  const pkgInfo = generationPkg(_name, _description, _author, _email)
   fs.writeFileSync('package.json', JSON.stringify(pkgInfo, null, 2))
 
-  const readme = generationReadme(name, description, author)
+  const readme = generationReadme(_name, _description, _author)
   fs.writeFileSync('README.md', readme)
 
-  const license = generationMITLicense(author)
+  const license = generationMITLicense(_author)
   fs.writeFileSync('LICENSE', license)
 
   log(`${green('[adapt-pkg]: running successful 🎉')}`)
